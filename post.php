@@ -8,7 +8,7 @@
 <body>
     <h1 style="text-align: center;">WebboardlnwZa007</h1>
     <hr>
-    <div style="text-align: center ;">ต้องการดูกระทู้หมายเลข<?php echo $_GET['id'];?></div>
+    <div style="text-align: center ;">ต้องการดูกระทู้หมายเลข <?php echo $_GET['id'];?></div>
     <br>
     <table style="border: 2px solid black; width:40%;" align="center">
         <tr style="background-color:#6CD2FE ;"><td>แสดงควาคิดเห็น</td></tr>
