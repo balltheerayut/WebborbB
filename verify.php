@@ -9,9 +9,19 @@
 <body>
 <h1 style="text-align: center;">WebboardlnwZa007</h1>
 <hr>
-<div style="text-align: center ;"> เข้าสู่ระบบด้วย<br>
-                                Login =<?php echo $_POST['Login']; ?><br>
-                                Password =<?php echo $_POST['pwd']; ?>
-                            </div>
+<div style="text-align: center ;"> 
+<?php $n = $_POST['login']; 
+      $p = $_POST['pwd'];
+                if ($n == "admin"&& $p == "ad1234"){
+                    echo "<center> ยินดีต้อนรับ คุณAdmin <BR>";
+                    }
+                if ($n == "member"&& $p == "mem1234") {
+                    echo "<center> ยินดีต้อนรับ คุณMember <BR>";
+                    }
+                    echo"<a href=login.html>กลับไปหน้าหลัก</a>";
+                            
+                            
+?>
+</div>
 </body>
 </html>
