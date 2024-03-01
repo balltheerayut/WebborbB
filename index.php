@@ -14,76 +14,57 @@ session_start();
 <body>
     <div class="container-lg">
     <h1 style="text-align: center;" class="mt-3">WebboardlnwZa007</h1>
+    <hr>
 
-    <nav class="navbar navbar-expand-lg " style="background-color: #d3d3d3">
-  <div class="container-fluid">
-    <a class="navbar-brand" href="index.php"><i class="bi bi-house-fill"></i>Home</a>
-      <ul class="navbar-nav">
-        <?php if(!isset($_SESSION['id'])){
+    <?php 
+        include "nav.php";
+    ?> 
 
+<div class="mt-3 d-flex justify-content-between" >
+   <div>
+    <label>หมวดหมู่</label>
+     <span class="dropdown">
+        <button class="btn btn-light btn-sm dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+         --ทั้งหมด--
+         </button>
+        <ul class="dropdown-menu" aria-labelledby="Button2">
+            <li><a class="dropdown-item" href="#">ทั้งหมด</a></li>
+            <?php
+                $conn = new PDO("mysql:host=localhost;dbname=webbord;charset=utf8","root","");
+                $sql ="SELECT * FROM category";
+                foreach($conn->query($sql) as $row){
+                    echo "<li><a class=dropdown-item href=#>$row[name]</a></li>";
+                }
+                $conn=null;
+            ?>
+        </ul>
+        </span>
+   </div>    
+   <?php if(isset($_SESSION['id'])){?>
+   
+   <div> <a href="newpost.php" class="btn btn-success btn-sm">
+    <i class="bi bi-plus"></i> สร้างกระทู้ใหม่</a></div>
 
-        ?>
-        <li class="nav-item">
-          <a class="nav-link" href="login.php"><i class="bi bi-pencil-square"></i>เข้าสู่ระบบ</a>
-        </li>
-
-        <?php } else{?>
-
-            <li class="nav-item dropdown">
-          <a class="btn btn-outline-secondary dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi bi-person-lines-fill"></i>
-
-            <?php echo $_SESSION['name'];?>
-          </a>
-          
-          <ul class="dropdown-menu">
-            <li><a class="dropdown-item" href="logout.php"><i class="bi bi-power"></i>ออกจากระบบ</a></li>
-           
-          </ul>
-        </li>
-
-            <?php }?>
-      </ul>
-  </div>
-</nav>
-<div class="mt-3 d-flex justify-content-between"  >
-  <div>
-    <label> หมวดหมู่</label>
-    <span class="dropdown">
-  <button class="btn btn-light btn-sm  dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-    --ทั้งหมด--
-  </button>
-  <ul class="dropdown-menu">
-    <li><a class="dropdown-item" href="#">ทั้งหมด</a></li>
-    <li><a class="dropdown-item" href="#">เรื่องเรียน</a></li>
-    <li><a class="dropdown-item" href="#">เรื่องทั่วไป</a></li>
-  </ul>
-</span>
-  </div>
-  <?php
-  if (isset($_SESSION['id'])) {
-
-  ?>
-  <div>
-    <a href="newpost.php" class="btn btn-success btn-sm" > <i class="bi bi-plus"></i>สร้างกระทู้ใหม่</a>
-  </div>
-  <?php  }   ?>
+   <?php }?>
 </div>
-<table class="table table-striped mt-4">
-<?php
-        for ($i=1; $i <=10 ; $i++) { 
-            echo"<tr> <td class='d-flex justify-content-between'><a href=post.php?id=$i style=text-decoration:none>กระทู้ที่ $i </a>";
-            if ((isset($_SESSION['id'])) && ($_SESSION['role']=='a')) {
-                echo"&nbsp;&nbsp;<a href=delete.php?id=$i class='btn btn-danger btn-sm'><i class='bi bi-trash3'></i></a>";
-            }
 
-            else {
-                echo"";
-            }
-        
-            echo"</td></tr>";
-        } 
-        ?>
-</table>
-    </div>
+    <table class="table table-striped mt-4  ">
+    <?php 
+         
+        $conn = new PDO("mysql:host=localhost;dbname=webbord;charset=utf8","root","");
+        $sql = "SELECT t3.name,t1.title,t1.id,t2.login,t1.post_date FROM post as t1
+                INNER JOIN user as t2 ON (t1.user_id=t2.id)
+                INNER JOIN category as t3 ON (t1.cat_id=t3.id) ORDER BY t1.post_date DESC";
+        $result=$conn->query($sql);
+        while($row = $result->fetch()){
+            echo "<tr><td>[ $row[0] ] <a href=post.php?id=$row[2]
+            style=text-decoration:none>$row[1]</a><br>$row[3] - $row[4]</td></tr>";
+        }
+        $conn = null;
+    ?>
+    </table>
+
+        </div>
+    
 </body>
 </html>

@@ -16,9 +16,11 @@ if(isset($_POST['login'])){
         $sql1 = "INSERT INTO user (login,password,name,gender,email,role) 
                  VALUES ('$login','$passwd','$name','$gender','$email','m')";
         $conn->exec($sql1);
+        $_SESSION['add_login']="success";
     }
     $conn=null;
-    header("location:login.php");
+
+    header("location:register.php");
     die();
 }else{
     header("location:index.php");
