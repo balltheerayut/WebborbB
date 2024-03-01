@@ -1,4 +1,5 @@
 <?php
+if(isset($_POST['login'])){
     session_start();
     $login = $_POST['login'];
     $passwd =sha1($_POST['pwd']);
@@ -15,10 +16,12 @@
         $sql1 = "INSERT INTO user (login,password,name,gender,email,role) 
                  VALUES ('$login','$passwd','$name','$gender','$email','m')";
         $conn->exec($sql1);
-        $_SESSION['add_login']="success";
     }
     $conn=null;
-
-    header("location:register.php");
+    header("location:login.php");
     die();
+}else{
+    header("location:index.php");
+    die();
+}
 ?>
