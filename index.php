@@ -9,7 +9,7 @@ session_start();
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>WebboardlnwZa007</title>
+    <title>Webboard KakKak</title>
 </head>
 <body>
     <div class="container-lg">
@@ -26,7 +26,7 @@ session_start();
        <ul class="dropdown-menu" aria-labelledby="Button2">
         <li><a href="#" class="dropdown-item">ทั้งหมด</a></li>
         <?php
-            $conn=new PDO("mysql:host=localhost;dbname=webbord;
+            $conn=new PDO("mysql:host=localhost;dbname=webboard;
             charset=utf8","root","");
             $sql="SELECT * FROM category";
             foreach($conn->query($sql) as $row){
@@ -44,20 +44,20 @@ session_start();
       <?php } ?>
 </div>
     
-<table class="table table-striped mt-4  ">
-    <?php
-         
-        $conn = new PDO("mysql:host=localhost;dbname=webbord;charset=utf8","root","");
-        $sql = "SELECT t3.name,t1.title,t1.id,t2.login,t1.post_date FROM post as t1
-                INNER JOIN user as t2 ON (t1.user_id=t2.id)
-                INNER JOIN category as t3 ON (t1.cat_id=t3.id) ORDER BY t1.post_date DESC";
-        $result=$conn->query($sql);
-        while($row = $result->fetch()){
-            echo "<tr><td>[ $row[0] ] <a href=post.php?id=$row[2]
+    <table class="table table-striped">
+      <?php
+         $conn=new PDO("mysql:host=localhost;dbname=webboard;charset=utf8","root","");
+         $sql="SELECT t3.name,t1.title,t1.id,t2.login,t1.post_date FROM post as t1
+         INNER JOIN user as t2 ON (t1.user_id=t2.id)
+         INNER JOIN category as t3 ON (t1.cat_id=t3.id) ORDER BY t1.post_date DESC";
+         $result=$conn->query($sql);
+         while($row =  $result->fetch()){
+            echo "<tr><td>[$row[0] ]<a href=post.php?id=$row[2]
             style=text-decoration:none>$row[1]</a><br>$row[3] - $row[4]</td></tr>";
-        }
-        $conn = null;
-    ?>
+         }
+         $conn=null;
+           
+        ?>
     </table>
     </div>
 </body>

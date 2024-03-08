@@ -12,11 +12,11 @@ if(!isset($_SESSION['id'])){
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>newpost</title>
+    <title>NewPost</title>
 </head>
 <body>
     <div class="container">
-        <h1 style="text-align: center;" class="m-3">WebboardlnwZa007</h1>
+        <h1 style="text-align: center;" class="m-3">Webboard KakKak</h1>
         <?php include "nav.php" ?>
         <div class="row mt-4">
             <div class="col-lg-3 col-md-2 col-sm-1"></div>
@@ -30,7 +30,7 @@ if(!isset($_SESSION['id'])){
                                 <div class="col-lg-9">
                                     <select name="category" class="form-select">
                                         <?php 
-                                            $conn=new PDO("mysql:host=localhost;dbname=webbord;charset=utf8","root","");
+                                            $conn=new PDO("mysql:host=localhost;dbname=webboard;charset=utf8","root","");
                                             $sql="SELECT * FROM category";
                                             foreach($conn->query($sql) as $row){
                                             echo "<option value=$row[id]>$row[name]</option>";
