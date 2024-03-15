@@ -16,7 +16,7 @@ if(!isset($_SESSION['id'])){
 </head>
 <body>
     <div class="container">
-        <h1 style="text-align: center;" class="m-3">Webboard KakKak</h1>
+        <h1 style="text-align: center;" class="m-3">Webboardlnwza007</h1>
         <?php include "nav.php" ?>
         <div class="row mt-4">
             <div class="col-lg-3 col-md-2 col-sm-1"></div>

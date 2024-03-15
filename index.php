@@ -9,11 +9,18 @@ session_start();
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Webboard KakKak</title>
+    <title>Webboard</title>
+    <script>
+    function deletePost(){
+        let r = confirm("ต้องการลบจริงหรือไม่");
+        return r;
+    }
+    </script>
 </head>
 <body>
     <div class="container-lg">
-    <h1 style="text-align: center;" class="m-3">Webboard KakKak</h1>
+    <h1 style="text-align: center;" class="m-3">Webboardlnwza007</h1>
+   
     <?php include "nav.php" ?>
 
 <div class="mt-3 d-flex justify-content-between">
@@ -37,6 +44,7 @@ session_start();
     </ul>
       </span>
     </div>
+    
     <?php if(isset($_SESSION['id'])){ ?> 
     <div ><a href="newpost.php" class="btn btn-success btn-sm">
       <i class="bi bi-plus"></i> สร้างกระทู้ใหม่</a>
@@ -52,11 +60,16 @@ session_start();
          INNER JOIN category as t3 ON (t1.cat_id=t3.id) ORDER BY t1.post_date DESC";
          $result=$conn->query($sql);
          while($row =  $result->fetch()){
-            echo "<tr><td>[$row[0] ]<a href=post.php?id=$row[2]
-            style=text-decoration:none>$row[1]</a><br>$row[3] - $row[4]</td></tr>";
+            echo "<tr><td class='d-flex justify-content-between'>
+            <div>[$row[0] ]<a href=post.php?id=$row[2]
+            style=text-decoration:none>$row[1]</a><br>$row[3] - $row[4]</div>";
+            if(isset($_SESSION['id'])&&$_SESSION["role"]=='a'){
+                echo "<div class='me-2 align-self-center'><a href=delete.php?id=$row[2] 
+                class='btn btn-danger btn-sm' onclick='return deletePost()'><i class='bi bi-trash3-fill'></i></a></div>";
+            }
+            echo"</td></tr>";
          }
-         $conn=null;
-           
+         $conn=null; 
         ?>
     </table>
     </div>
